@@ -120,12 +120,12 @@ class Job(object):
         if retry_every:
             now = ResQ._current_time()
             first_attempt = self._payload.get("first_attempt", now)
-            retry_until = first_attempt + timedelta(seconds=retry_timeout)
             retry_at = now + timedelta(seconds=retry_every)
-            if retry_at < retry_until:
+            if not retry_timeout or retry_at < first_attempt + timedelta(seconds=retry_timeout):
                 self.resq.enqueue_at(retry_at, payload_class, *args,
                         **{'first_attempt':first_attempt})
                 return True
+
         return False
 
     @classmethod
