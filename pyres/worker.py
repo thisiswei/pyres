@@ -149,7 +149,7 @@ class Worker(object):
                     break
                 #procline @paused ? "Paused" : "Waiting for #{@queues.join(',')}"
                 self._setproctitle("Waiting")
-                #time.sleep(interval)
+            time.sleep(interval)
         self.unregister_worker()
 
     def fork_worker(self, job):
