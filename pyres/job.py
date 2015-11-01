@@ -76,7 +76,6 @@ class Job(object):
 
         metadata["failed"] = False
         metadata["perform_timestamp"] = time.time()
-        check_after = True
         try:
             if before_perform:
                 payload_class.before_perform(metadata)
